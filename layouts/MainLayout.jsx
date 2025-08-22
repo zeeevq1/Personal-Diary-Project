@@ -4,7 +4,7 @@ const MainLayout = () => {
   return (
     <div className="flex flex-col w-screen">
       <Header />
-      <main className="h-screen">
+      <main>
         <CreateDiary />
       </main>
       <footer></footer>
