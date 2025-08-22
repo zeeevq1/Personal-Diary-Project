@@ -1,11 +1,12 @@
-import { CreateDiary, Header } from "../components";
+import { CreateDiary, Header, DisplayDiary } from "../components";
 
 const MainLayout = () => {
   return (
-    <div className="flex flex-col w-screen">
+    <div className="flex flex-col w-full h-screen">
       <Header />
       <main>
-        <CreateDiary />
+        {/* <CreateDiary /> */}
+        <DisplayDiary />
       </main>
       <footer></footer>
     </div>
