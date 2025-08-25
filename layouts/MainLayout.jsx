@@ -1,5 +1,7 @@
 import { CreateDiary, Header, DisplayDiary } from "../components";
-import { useState } from "react";
+import { ToastContainer } from "react-toastify";
+import Form from "../components/Form";
+import Card from "../components/Card";
 
 const MainLayout = () => {
   const savedCards = JSON.parse(localStorage.getItem("cards")) || [];
@@ -13,6 +15,7 @@ const MainLayout = () => {
         {cards.length > 0 ? <DisplayDiary cards={cards} /> : <CreateDiary />}
       </main>
       <footer></footer>
+      <ToastContainer />
     </div>
   );
 };
