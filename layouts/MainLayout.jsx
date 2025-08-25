@@ -2,6 +2,7 @@ import { CreateDiary, Header, DisplayDiary } from "../components";
 import { ToastContainer } from "react-toastify";
 import Form from "../components/Form";
 import Card from "../components/Card";
+import { useState } from "react";
 
 const MainLayout = () => {
   const savedCards = JSON.parse(localStorage.getItem("cards")) || [];

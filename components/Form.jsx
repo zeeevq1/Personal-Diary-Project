@@ -21,7 +21,7 @@ const Form = () => {
     description: "",
   });
 
-  const [submitted, setSubmittedData] = useState(null);
+  const [submitted, setSubmitted] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -43,11 +43,12 @@ const Form = () => {
       const updateCards = [...savedCards, newCard];
       localStorage.setItem("cards", JSON.stringify(updateCards));
 
-      setSubmittedData(newCard);
+      setSubmitted(newCard);
 
       setForm({ title: "", date: "", image: "", description: "" });
 
       toast.success("Diary created successfully!");
+      setShowForm(false);
     } catch (error) {
       toast.error(error.message);
     }
@@ -56,7 +57,7 @@ const Form = () => {
   return (
     <>
       {showForm && (
-        <div className="fixed inset-0 flex justify-center items-center">
+        <div className="fixed inset-0 flex justify-center items-center z-50">
           <div className="absolute inset-0 bg-black opacity-50"></div>
 
           <div className="relative w-[50%] h-auto p-5 z-10">
@@ -78,71 +79,62 @@ const Form = () => {
               </svg>
             </button>
 
-            {!submitted ? (
-              <form
-                className="p-7 bg-gray-100 border-2 rounded-xl shadow-lg"
-                onSubmit={handleSubmit}
-              >
-                <label>
-                  Title
-                  <input
-                    type="text"
-                    name="title"
-                    value={form.title}
-                    placeholder="Title"
-                    className="input input-bordered w-full"
-                    onChange={handleChange}
-                  />
-                </label>
+            <form
+              className="p-7 bg-gray-100 border-2 rounded-xl shadow-lg"
+              onSubmit={handleSubmit}
+            >
+              <label>
+                Title
+                <input
+                  type="text"
+                  name="title"
+                  value={form.title}
+                  placeholder="Title"
+                  className="input input-bordered w-full"
+                  onChange={handleChange}
+                />
+              </label>
 
-                <label>
-                  Date
-                  <input
-                    type="date"
-                    name="date"
-                    value={form.date}
-                    className="input input-bordered w-full"
-                    onChange={handleChange}
-                  />
-                </label>
+              <label>
+                Date
+                <input
+                  type="date"
+                  name="date"
+                  value={form.date}
+                  className="input input-bordered w-full"
+                  onChange={handleChange}
+                />
+              </label>
 
-                <label>
-                  Image
-                  <input
-                    type="text"
-                    name="image"
-                    value={form.image}
-                    placeholder="Image URL"
-                    className="input input-bordered w-full"
-                    onChange={handleChange}
-                  />
-                </label>
+              <label>
+                Image
+                <input
+                  type="text"
+                  name="image"
+                  value={form.image}
+                  placeholder="Image URL"
+                  className="input input-bordered w-full"
+                  onChange={handleChange}
+                />
+              </label>
 
-                <label>
-                  Text
-                  <textarea
-                    name="description"
-                    value={form.description}
-                    placeholder="Content"
-                    className="textarea textarea-bordered w-full"
-                    onChange={handleChange}
-                  />
-                </label>
+              <label>
+                Text
+                <textarea
+                  name="description"
+                  value={form.description}
+                  placeholder="Content"
+                  className="textarea textarea-bordered w-full"
+                  onChange={handleChange}
+                />
+              </label>
 
-                <div className="flex justify-center items-center mt-6">
-                  <button type="submit" className="btn btn-primary py-3 px-16">
-                    Submit
-                  </button>
-                </div>
-              </form>
-            ) : (
-              <Card
-                title={submitted.title}
-                date={submitted.date}
-                image={submitted.image}
-                description={submitted.description}
-              />
-            )}
+              <div className="flex justify-center items-center mt-6">
+                <button type="submit" className="btn btn-primary py-3 px-16">
+                  Submit
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       )}

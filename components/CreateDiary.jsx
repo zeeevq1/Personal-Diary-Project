@@ -8,7 +8,10 @@ const CreateDiary = () => {
   return (
     <div className="flex w-full justify-center h-screen items-center">
       {!showForm ? (
-        <button onClick={handleClick} className="mb-[10vh] btn btn-primary">
+        <button
+          onClick={() => setShowForm(true)}
+          className="mb-[10vh] btn btn-primary"
+        >
           Create Diary
         </button>
       ) : (
