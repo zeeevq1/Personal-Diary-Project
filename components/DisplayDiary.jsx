@@ -1,10 +1,7 @@
 import Form from "./Form";
 import { useState } from "react";
 
-const DisplayDiary = () => {
-  const savedCards = JSON.parse(localStorage.getItem("cards")) || [];
-  const [cards, setCards] = useState(savedCards);
-
+const DisplayDiary = ({ cards }) => {
   return (
     <div className="p-[1rem] w-full">
       {

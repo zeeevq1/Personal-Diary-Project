@@ -50,14 +50,11 @@ const Form = () => {
   };
 
   return (
-    <div className="fixed inset-0 flex justify-center items-center ">
+    <div className="fixed inset-0 z-50 flex justify-center items-center">
       <div className="absolute inset-0 bg-black opacity-50"></div>
-      <div className="relative w-[50%] h-auto p-5 z-10">
+      <div className="relative bg-white rounded-xl shadow-lg w-[50%] p-6 z-50">
         {!submitted ? (
-          <form
-            className="p-7 bg-gray-100 border-2 rounded-xl shadow-lg"
-            onSubmit={handleSubmit}
-          >
+          <form className="p-5" onSubmit={handleSubmit}>
             <label>
               Title
               <input
@@ -65,7 +62,7 @@ const Form = () => {
                 name="title"
                 value={form.title}
                 placeholder="Title"
-                className="input input-bordered w-full"
+                className="input input-bordered w-full mt-[0.2rem] mb-[0.5rem]"
                 onChange={handleChange}
               />
             </label>
@@ -76,7 +73,7 @@ const Form = () => {
                 type="date"
                 name="date"
                 value={form.date}
-                className="input input-bordered w-full"
+                className="input input-bordered w-full mt-[0.2rem] mb-[0.5rem]"
                 onChange={handleChange}
               />
             </label>
@@ -88,7 +85,7 @@ const Form = () => {
                 name="image"
                 value={form.image}
                 placeholder="Image URL"
-                className="input input-bordered w-full"
+                className="input input-bordered w-full mt-[0.2rem] mb-[0.5rem]"
                 onChange={handleChange}
               />
             </label>
@@ -99,7 +96,7 @@ const Form = () => {
                 name="description"
                 value={form.description}
                 placeholder="Content"
-                className="textarea textarea-bordered w-full"
+                className="textarea textarea-bordered w-full mt-[0.2rem] mb-[0.5rem]"
                 onChange={handleChange}
               />
             </label>
