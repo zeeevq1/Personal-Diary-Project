@@ -1,4 +1,5 @@
 import { CreateDiary, Header, DisplayDiary } from "../components";
+import { ToastContainer } from "react-toastify";
 import Form from "../components/Form";
 import Card from "../components/Card";
 
@@ -11,6 +12,7 @@ const MainLayout = () => {
         {/* <DisplayDiary /> */}
       </main>
       <footer></footer>
+      <ToastContainer />
     </div>
   );
 };
