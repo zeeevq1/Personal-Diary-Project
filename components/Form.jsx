@@ -1,7 +1,17 @@
 import { useState } from "react";
 import Card from "./Card.jsx";
 
-function Form() {
+const urlValidation = (url) => {
+  try {
+    new URL(url);
+    return true;
+  } catch (error) {
+    return false;
+  }
+};
+
+const Form = () => {
+  const savedCards = JSON.parse(localStorage.getItem("cards")) || [];
   const [form, setForm] = useState({
     title: "",
     date: "",
@@ -22,9 +32,16 @@ function Form() {
       if (!form.title.trim()) throw new Error("Name is required");
       if (!form.date.trim()) throw new Error("Date is required");
       if (!form.image.trim()) throw new Error("Image is required");
+      if (!urlValidation(form.image))
+        throw new Error("Image must be a valid URL");
       if (!form.description.trim()) throw new Error("Description is required");
 
-      setSubmittedData(form);
+      const newCard = { ...form, id: crypto.randomUUID() };
+
+      const updateCards = [...savedCards, newCard];
+      localStorage.setItem("cards", JSON.stringify(updateCards));
+
+      setSubmittedData(newCard);
 
       setForm({ title: "", date: "", image: "", description: "" });
     } catch (error) {
@@ -33,9 +50,12 @@ function Form() {
   };
 
   return (
-    <div className="w-[400px]">
+    <div className="">
       {!submitted ? (
-        <form className="flex flex-col w-full gap-4" onSubmit={handleSubmit}>
+        <form
+          className="p-7 bg-gray-100 border-2 rounded-xl"
+          onSubmit={handleSubmit}
+        >
           <label>
             Title
             <input
@@ -82,7 +102,7 @@ function Form() {
             />
           </label>
 
-          <button type="submit" className="btn btn-primary mt-2">
+          <button type="submit" className="btn btn-primary mt-2 ">
             Submit
           </button>
         </form>
@@ -96,5 +116,5 @@ function Form() {
       )}
     </div>
   );
-}
+};
 export default Form;
