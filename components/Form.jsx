@@ -50,8 +50,9 @@ const Form = () => {
   };
 
   return (
-    <div className="fixed inset-0 flex justify-center items-center">
-      <div className="w-[50%] h-auto p-5">
+    <div className="fixed inset-0 flex justify-center items-center ">
+      <div className="absolute inset-0 bg-black opacity-50"></div>
+      <div className="relative w-[50%] h-auto p-5 z-10">
         {!submitted ? (
           <form
             className="p-7 bg-gray-100 border-2 rounded-xl shadow-lg"
