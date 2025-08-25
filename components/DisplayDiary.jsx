@@ -29,21 +29,22 @@ const names = [
 
 const DisplayDiary = () => {
   return (
-    <div className="p-[1rem]">
-      <div className="grid grid-cols-4 gap-[1rem] p-[1rem]">
-        <Form />
-        {names.map((e) => (
-          <div key={e.id} className="card bg-base-100 shadow-sm">
-            <figure>
-              <img src={e.imageUrl} alt={e.title} />
-            </figure>
-            <div className="card-body">
-              <h2 className="card-title">{e.title}</h2>
-              <p>{e.descritption}</p>
+    <div className="p-[1rem] w-full">
+      {
+        <div className="grid grid-cols-4 gap-[1rem] p-[1rem]">
+          {names.map((e) => (
+            <div key={e.id} className="card bg-base-100 shadow-sm">
+              <figure>
+                <img src={e.imageUrl} alt={e.title} />
+              </figure>
+              <div className="card-body">
+                <h2 className="card-title">{e.title}</h2>
+                <p>{e.descritption}</p>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      }
     </div>
   );
 };
