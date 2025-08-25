@@ -50,9 +50,12 @@ const Form = () => {
   };
 
   return (
-    <div className="w-[400px]">
+    <div className="">
       {!submitted ? (
-        <form className="flex flex-col w-full gap-4" onSubmit={handleSubmit}>
+        <form
+          className="p-7 bg-gray-100 border-2 rounded-xl"
+          onSubmit={handleSubmit}
+        >
           <label>
             Title
             <input
@@ -99,7 +102,7 @@ const Form = () => {
             />
           </label>
 
-          <button type="submit" className="btn btn-primary mt-2">
+          <button type="submit" className="btn btn-primary mt-2 ">
             Submit
           </button>
         </form>

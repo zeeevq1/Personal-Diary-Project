@@ -31,6 +31,7 @@ const DisplayDiary = () => {
   return (
     <div className="p-[1rem]">
       <div className="grid grid-cols-4 gap-[1rem] p-[1rem]">
+        <Form />
         {names.map((e) => (
           <div key={e.id} className="card bg-base-100 shadow-sm">
             <figure>

@@ -4,12 +4,11 @@ import Card from "../components/Card";
 
 const MainLayout = () => {
   return (
-    <div className="flex flex-col w-full h-screen">
+    <div className=" ">
       <Header />
-      <main>
-        {/* <CreateDiary /> */}
-        <DisplayDiary />
-        <Form />
+      <main className="px-50 py-10">
+        <CreateDiary />
+        {/* <DisplayDiary /> */}
       </main>
       <footer></footer>
     </div>
