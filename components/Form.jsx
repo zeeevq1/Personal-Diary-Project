@@ -50,70 +50,74 @@ const Form = () => {
   };
 
   return (
-    <div className="">
-      {!submitted ? (
-        <form
-          className="p-7 bg-gray-100 border-2 rounded-xl"
-          onSubmit={handleSubmit}
-        >
-          <label>
-            Title
-            <input
-              type="text"
-              name="title"
-              value={form.title}
-              placeholder="Title"
-              className="input input-bordered w-full"
-              onChange={handleChange}
-            />
-          </label>
+    <div className="fixed inset-0 flex justify-center items-center">
+      <div className="w-[50%] h-auto p-5">
+        {!submitted ? (
+          <form
+            className="p-7 bg-gray-100 border-2 rounded-xl shadow-lg"
+            onSubmit={handleSubmit}
+          >
+            <label>
+              Title
+              <input
+                type="text"
+                name="title"
+                value={form.title}
+                placeholder="Title"
+                className="input input-bordered w-full"
+                onChange={handleChange}
+              />
+            </label>
 
-          <label>
-            Date
-            <input
-              type="date"
-              name="date"
-              value={form.date}
-              className="input input-bordered w-full"
-              onChange={handleChange}
-            />
-          </label>
+            <label>
+              Date
+              <input
+                type="date"
+                name="date"
+                value={form.date}
+                className="input input-bordered w-full"
+                onChange={handleChange}
+              />
+            </label>
 
-          <label>
-            Image
-            <input
-              type="text"
-              name="image"
-              value={form.image}
-              placeholder="Image URL"
-              className="input input-bordered w-full"
-              onChange={handleChange}
-            />
-          </label>
+            <label>
+              Image
+              <input
+                type="text"
+                name="image"
+                value={form.image}
+                placeholder="Image URL"
+                className="input input-bordered w-full"
+                onChange={handleChange}
+              />
+            </label>
 
-          <label>
-            Text
-            <textarea
-              name="description"
-              value={form.description}
-              placeholder="Content"
-              className="textarea textarea-bordered w-full"
-              onChange={handleChange}
-            />
-          </label>
+            <label>
+              Text
+              <textarea
+                name="description"
+                value={form.description}
+                placeholder="Content"
+                className="textarea textarea-bordered w-full"
+                onChange={handleChange}
+              />
+            </label>
 
-          <button type="submit" className="btn btn-primary mt-2 ">
-            Submit
-          </button>
-        </form>
-      ) : (
-        <Card
-          title={submitted.title}
-          date={submitted.date}
-          image={submitted.image}
-          description={submitted.description}
-        />
-      )}
+            <div className="flex justify-center items-center mt-6">
+              <button type="submit" className="btn btn-primary py-3 px-16">
+                Submit
+              </button>
+            </div>
+          </form>
+        ) : (
+          <Card
+            title={submitted.title}
+            date={submitted.date}
+            image={submitted.image}
+            description={submitted.description}
+          />
+        )}
+      </div>
     </div>
   );
 };
