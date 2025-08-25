@@ -1,12 +1,12 @@
 import { useState } from "react";
 import Form from "./Form";
 
-const Card = ({ title, date, imageUrl, description }) => {
+const Card = ({ title, date, image, description }) => {
   return (
     <div>
       <div className="card bg-base-100 w-96 shadow-sm">
         <figure>
-          <img className="w-full object-cover" src={imageUrl} alt={title} />
+          <img className="w-full object-cover" src={image} alt={title} />
         </figure>
         <div className="card-body">
           <h2 className="card-title">{title}</h2>
