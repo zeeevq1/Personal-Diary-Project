@@ -1,12 +1,12 @@
 import { useState } from "react";
 import Form from "./Form";
 
-function Card({ title, date, image, description }) {
+const Card = ({ title, date, imageUrl, description }) => {
   return (
     <div>
       <div className="card bg-base-100 w-96 shadow-sm">
         <figure>
-          <img className="w-full object-cover" src={image} alt={title} />
+          <img className="w-full object-cover" src={imageUrl} alt={title} />
         </figure>
         <div className="card-body">
           <h2 className="card-title">{title}</h2>
@@ -22,6 +22,6 @@ function Card({ title, date, image, description }) {
       </div>
     </div>
   );
-}
+};
 
 export default Card;

@@ -1,3 +1,5 @@
+import Form from "./Form";
+import Card from "./Card";
 const names = [
   {
     id: 1,
@@ -24,14 +26,15 @@ const names = [
     imageUrl: "https://picsum.photos/id/13/2500/1667",
   },
 ];
+
 const DisplayDiary = () => {
   return (
-    <div>
+    <div className="p-[1rem]">
       <div className="grid grid-cols-4 gap-[1rem] p-[1rem]">
         {names.map((e) => (
-          <div className="card bg-base-100 shadow-sm">
+          <div key={e.id} className="card bg-base-100 shadow-sm">
             <figure>
-              <img src={e.imageUrl} alt="Shoes" />
+              <img src={e.imageUrl} alt={e.title} />
             </figure>
             <div className="card-body">
               <h2 className="card-title">{e.title}</h2>
@@ -43,4 +46,5 @@ const DisplayDiary = () => {
     </div>
   );
 };
+
 export default DisplayDiary;
