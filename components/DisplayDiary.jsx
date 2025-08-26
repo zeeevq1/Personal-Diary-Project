@@ -10,15 +10,15 @@ const DisplayDiary = ({ cards }) => {
         {cards.map((e) => (
           <div
             key={e.id}
-            className="card bg-base-100 shadow-sm cursor-pointer"
+            className="card bg-white shadow-sm cursor-pointer"
             onClick={() => setSelectedCard(e)}
           >
             <figure>
               <img src={e.image} alt={e.title} className="w-full h-[200px]" />
             </figure>
-            <div className="card-body">
+            <div className="card-body text-gray-800">
               <h2 className="card-title">{e.title}</h2>
-              <p>{e.description}</p>
+              <p>{e.date}</p>
             </div>
           </div>
         ))}

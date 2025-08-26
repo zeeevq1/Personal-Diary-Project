@@ -1,10 +1,10 @@
 const Card = ({ card, onClose }) => {
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center">
-      <div className="card lg:card-side bg-base-100 shadow-xl relative max-w-2xl w-full">
+      <div className="card lg:card-side bg-base-100 shadow-xl relative max-w-5xl w-full border-2 border-[#00bfaa]">
         <button
           onClick={onClose}
-          className="absolute top-2 right-2 w-10 h-10 flex items-center justify-center rounded-full cursor-pointer transition bg-red-500 hover:bg-red-600"
+          className="absolute top-[-1.3rem] right-[-1rem] w-10 h-10 flex items-center justify-center rounded-full cursor-pointer transition bg-red-500 hover:bg-red-600"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -20,7 +20,7 @@ const Card = ({ card, onClose }) => {
           </svg>
         </button>
 
-        <figure className="w-[200px] flex-1/5">
+        <figure className="w-[400px] h-[300px] aspect-[16/9] flex-shrink-0">
           <img
             src={card.image}
             alt={card.title}
@@ -28,10 +28,14 @@ const Card = ({ card, onClose }) => {
           />
         </figure>
 
-        <div className="card-body">
-          <h1 className="card-title">{card.title}</h1>
-          <h2 className="text-sm text-gray-500">{card.date}</h2>
-          <p className="text-sm">{card.description}</p>
+        <div className="card-body flex flex-col gap-2">
+          <h1 className="card-title text-3xl bg-white text-gray-800 p-2 rounded-md">
+            {card.title}
+          </h1>
+          <span className="text-[1rem] text-[#00bfaa] font-bold mb-4 ">
+            {card.date}
+          </span>
+          <p className="text-[1.1rem]">{card.description}</p>
         </div>
       </div>
     </div>
