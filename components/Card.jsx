@@ -33,7 +33,7 @@ const Card = ({ card, onClose }) => {
             {card.title}
           </h1>
           <span className="text-[1rem] text-[#00bfaa] font-bold mb-4 ">
-            {card.date}
+            {new Date(card.date).toDateString()}
           </span>
           <p className="text-[1.1rem]">{card.description}</p>
         </div>
