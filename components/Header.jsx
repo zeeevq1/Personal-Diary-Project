@@ -9,12 +9,12 @@ const Header = ({ showForm, setShowForm, setCards }) => {
       <nav className="flex justify-between items-center">
         <img
           src="./assets/logo.png"
-          className="w-[80px] h-[80px] ml-[1rem]"
+          className="w-[80px] h-[80px] ml-[1.2rem]"
         ></img>
 
         <button
           onClick={handleClick}
-          className="btn btn-success btn-sm mr-[1.9rem]"
+          className="btn btn-success btn-sm mr-[2.5rem]"
         >
           Create Diary
         </button>

@@ -16,7 +16,7 @@ const MainLayout = () => {
         setShowForm={setShowForm}
         setCards={setCards}
       />
-      <main className="px-50 py-10">
+      <main className="px-[0.5rem] py-[0.5rem]">
         {Array.isArray(cards) && cards.length > 0 ? (
           <DisplayDiary cards={cards} />
         ) : (
