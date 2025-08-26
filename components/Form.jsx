@@ -1,19 +1,15 @@
 import { useState } from "react";
-import Card from "./Card.jsx";
 import { toast } from "react-toastify";
 
-const urlValidation = (url) => {
-  try {
-    new URL(url);
-    return true;
-  } catch (error) {
-    return false;
-  }
-};
-
-const Form = () => {
-  const [showForm, setShowForm] = useState(true);
-  const savedCards = JSON.parse(localStorage.getItem("cards")) || [];
+const Form = ({ showForm, setShowForm, setCards }) => {
+  const urlValidation = (url) => {
+    try {
+      new URL(url);
+      return true;
+    } catch (error) {
+      return false;
+    }
+  };
   const [form, setForm] = useState({
     title: "",
     date: "",
@@ -23,6 +19,9 @@ const Form = () => {
 
   const [submitted, setSubmitted] = useState(null);
 
+  const handleOnClick = () => {
+    setShowForm(!showForm);
+  };
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
@@ -40,15 +39,17 @@ const Form = () => {
 
       const newCard = { ...form, id: crypto.randomUUID() };
 
-      const updateCards = [...savedCards, newCard];
-      localStorage.setItem("cards", JSON.stringify(updateCards));
+      setCards((prev) => {
+        const updateCards = [...prev, newCard];
+        localStorage.setItem("cards", JSON.stringify(updateCards));
+        return updateCards;
+      });
 
-      setSubmitted(newCard);
+      // setSubmitted(newCard);
 
       setForm({ title: "", date: "", image: "", description: "" });
-
       toast.success("Diary created successfully!");
-      setShowForm(false);
+      setShowForm(!showForm);
     } catch (error) {
       toast.error(error.message);
     }
@@ -62,7 +63,7 @@ const Form = () => {
 
           <div className="relative w-[50%] h-auto p-5 z-10">
             <button
-              onClick={() => setShowForm(false)}
+              onClick={handleOnClick}
               className="absolute top-2 right-2 w-10 h-10 flex items-center justify-center rounded-full cursor-pointer transition bg-red-500 hover:bg-red-600"
             >
               <svg
@@ -80,7 +81,7 @@ const Form = () => {
             </button>
 
             <form
-              className="p-7 bg-gray-100 border-2 rounded-xl shadow-lg"
+              className="p-7 bg-gray-100 rounded-xl shadow-lg"
               onSubmit={handleSubmit}
             >
               <label>
@@ -90,7 +91,7 @@ const Form = () => {
                   name="title"
                   value={form.title}
                   placeholder="Title"
-                  className="input input-bordered w-full"
+                  className="input input-bordered w-full mt-[0.2rem] mb-[0.3rem]"
                   onChange={handleChange}
                 />
               </label>
@@ -101,7 +102,7 @@ const Form = () => {
                   type="date"
                   name="date"
                   value={form.date}
-                  className="input input-bordered w-full"
+                  className="input input-bordered w-full mt-[0.2rem] mb-[0.3rem]"
                   onChange={handleChange}
                 />
               </label>
@@ -113,7 +114,7 @@ const Form = () => {
                   name="image"
                   value={form.image}
                   placeholder="Image URL"
-                  className="input input-bordered w-full"
+                  className="input input-bordered w-full mt-[0.2rem] mb-[0.3rem]"
                   onChange={handleChange}
                 />
               </label>
@@ -124,7 +125,7 @@ const Form = () => {
                   name="description"
                   value={form.description}
                   placeholder="Content"
-                  className="textarea textarea-bordered w-full"
+                  className="textarea textarea-bordered w-full mt-[0.2rem] mb-[0.3rem]"
                   onChange={handleChange}
                 />
               </label>

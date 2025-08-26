@@ -11,9 +11,17 @@ const MainLayout = () => {
 
   return (
     <div className=" ">
-      <Header showForm={showForm} setShowForm={setShowForm} />
+      <Header
+        showForm={showForm}
+        setShowForm={setShowForm}
+        setCards={setCards}
+      />
       <main className="px-50 py-10">
-        {cards.length > 0 ? <DisplayDiary cards={cards} /> : <CreateDiary />}
+        {Array.isArray(cards) && cards.length > 0 ? (
+          <DisplayDiary cards={cards} />
+        ) : (
+          <CreateDiary setShowForm={setShowForm} setCards={setCards} />
+        )}
       </main>
       <footer></footer>
       <ToastContainer />

@@ -9,7 +9,7 @@ const DisplayDiary = ({ cards }) => {
           {cards.map((e) => (
             <div key={e.id} className="card bg-base-100 shadow-sm">
               <figure>
-                <img src={e.image} alt={e.title} />
+                <img src={e.image} alt={e.title} className="w-full h-[150px]" />
               </figure>
               <div className="card-body">
                 <h2 className="card-title">{e.title}</h2>
