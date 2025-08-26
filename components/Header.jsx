@@ -1,6 +1,6 @@
 import Form from "./Form";
 
-const Header = ({ showForm, setShowForm }) => {
+const Header = ({ showForm, setShowForm, setCards }) => {
   const handleClick = () => {
     setShowForm(!showForm);
   };
@@ -18,7 +18,13 @@ const Header = ({ showForm, setShowForm }) => {
         >
           Create Diary
         </button>
-        {showForm && <Form />}
+        {showForm && (
+          <Form
+            showForm={showForm}
+            setShowForm={setShowForm}
+            setCards={setCards}
+          />
+        )}
       </nav>
     </header>
   );
