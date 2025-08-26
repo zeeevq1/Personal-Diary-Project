@@ -39,8 +39,8 @@ const Form = () => {
       if (!form.description.trim()) throw new Error("Description is required");
 
       const newCard = { ...form, id: crypto.randomUUID() };
-
       const updateCards = [...savedCards, newCard];
+
       localStorage.setItem("cards", JSON.stringify(updateCards));
 
       setSubmitted(newCard);
