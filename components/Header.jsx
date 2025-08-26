@@ -1,6 +1,6 @@
 import Form from "./Form";
 
-const Header = ({ showForm, setShowForm, setCards }) => {
+const Header = ({ showForm, setShowForm, setCards, hasCards }) => {
   const handleClick = () => {
     setShowForm(!showForm);
   };
@@ -11,13 +11,14 @@ const Header = ({ showForm, setShowForm, setCards }) => {
           src="./assets/logo.png"
           className="w-[80px] h-[80px] ml-[1.2rem]"
         ></img>
-
-        <button
-          onClick={handleClick}
-          className="btn btn-success btn-sm mr-[2.5rem]"
-        >
-          Create Diary
-        </button>
+        {hasCards && (
+          <button
+            onClick={handleClick}
+            className="btn btn-accent btn-sm mr-[2.5rem] text-[0.9rem]"
+          >
+            Create Entry
+          </button>
+        )}
         {showForm && (
           <Form
             showForm={showForm}

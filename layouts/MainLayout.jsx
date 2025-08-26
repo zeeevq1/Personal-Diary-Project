@@ -1,23 +1,29 @@
 import { CreateDiary, Header, DisplayDiary } from "../components";
 import { ToastContainer } from "react-toastify";
-import Form from "../components/Form";
-import Card from "../components/Card";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const MainLayout = () => {
   const savedCards = JSON.parse(localStorage.getItem("cards")) || [];
   const [cards, setCards] = useState(savedCards);
   const [showForm, setShowForm] = useState(false);
+  const [hasCards, setHasCards] = useState(
+    Array.isArray(cards) && cards.length > 0
+  );
+
+  useEffect(() => {
+    setHasCards(cards.length > 0);
+  }, [cards]);
 
   return (
-    <div className=" ">
+    <div className="h-screen flex flex-col">
       <Header
         showForm={showForm}
         setShowForm={setShowForm}
         setCards={setCards}
+        hasCards={hasCards}
       />
-      <main className="px-[0.5rem] py-[0.5rem]">
-        {Array.isArray(cards) && cards.length > 0 ? (
+      <main className="flex-1 flex flex-col">
+        {hasCards ? (
           <DisplayDiary cards={cards} />
         ) : (
           <CreateDiary setShowForm={setShowForm} setCards={setCards} />

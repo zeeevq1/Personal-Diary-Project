@@ -5,11 +5,16 @@ const CreateDiary = ({ showForm, setShowForm, setCards }) => {
     setShowForm(!showForm);
   };
   return (
-    <div className="flex w-full justify-center h-screen items-center">
+    <div className="flex flex-1 w-full justify-center items-center">
       {!showForm ? (
-        <button onClick={handleClick} className="mb-[10vh] btn btn-primary">
-          Create Diary
-        </button>
+        <div className="flex flex-col items-center gap-4">
+          <p className="font-sans text-2xl text-center">
+            Write what’s on your mind.
+          </p>
+          <button onClick={handleClick} className="btn btn-accent">
+            Create Entry
+          </button>
+        </div>
       ) : (
         <Form
           showForm={showForm}
