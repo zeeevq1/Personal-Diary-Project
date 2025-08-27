@@ -30,6 +30,11 @@ const Form = ({ showForm, setShowForm, setCards }) => {
     e.preventDefault(e.target.elements);
 
     try {
+      const today = new Date().toISOString().split("T")[0]; // formato YYYY-MM-DD
+      const lastCardDate = localStorage.getItem("lastCardDate");
+      if (lastCardDate === today) {
+        throw new Error("You can only create one diary per day!");
+      }
       if (!form.title.trim()) throw new Error("Name is required");
       if (!form.date.trim()) throw new Error("Date is required");
       if (!form.image.trim()) throw new Error("Image is required");
@@ -45,7 +50,7 @@ const Form = ({ showForm, setShowForm, setCards }) => {
         return updateCards;
       });
 
-      // setSubmitted(newCard);
+      localStorage.setItem("lastCardDate", today);
 
       setForm({ title: "", date: "", image: "", description: "" });
       toast.success("Diary created successfully!");
