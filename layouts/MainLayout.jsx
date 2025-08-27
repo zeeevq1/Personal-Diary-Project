@@ -24,7 +24,7 @@ const MainLayout = () => {
       />
       <main className="flex-1 flex flex-col">
         {hasCards ? (
-          <DisplayDiary cards={cards} />
+          <DisplayDiary cards={cards} setCards={setCards} />
         ) : (
           <CreateDiary setShowForm={setShowForm} setCards={setCards} />
         )}

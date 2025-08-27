@@ -28,8 +28,8 @@ const Card = ({ card, onClose }) => {
           />
         </figure>
 
-        <div className="card-body flex flex-col gap-2">
-          <h1 className="card-title text-3xl bg-white text-gray-800 p-2 rounded-md">
+        <div className="card-body flex flex-col gap-3 px-8">
+          <h1 className="card-title text-3xl bg-white text-gray-800 rounded-md">
             {card.title}
           </h1>
           <span className="text-[1rem] text-[#00bfaa] font-bold mb-4 ">
