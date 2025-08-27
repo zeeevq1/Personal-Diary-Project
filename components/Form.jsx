@@ -1,7 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 
-const Form = ({ showForm, setShowForm, setCards }) => {
+const Form = ({
+  showForm,
+  setShowForm,
+  setCards,
+  card,
+  setSelectedCardEdit,
+}) => {
   const urlValidation = (url) => {
     try {
       new URL(url);
@@ -10,6 +16,7 @@ const Form = ({ showForm, setShowForm, setCards }) => {
       return false;
     }
   };
+
   const [form, setForm] = useState({
     title: "",
     date: "",
@@ -17,9 +24,23 @@ const Form = ({ showForm, setShowForm, setCards }) => {
     description: "",
   });
 
-  const [submitted, setSubmitted] = useState(null);
+  useEffect(() => {
+    if (card) {
+      console.log("Editing card:", card.title);
+      setForm({
+        title: card.title,
+        date: card.date,
+        image: card.image,
+        description: card.description,
+      });
+    } else {
+      console.log("No card, creating new one");
+      setForm({ title: "", date: "", image: "", description: "" });
+    }
+  }, [card]);
 
   const handleOnClick = () => {
+    setSelectedCardEdit(null);
     setShowForm(!showForm);
   };
   const handleChange = (e) => {
@@ -36,19 +57,28 @@ const Form = ({ showForm, setShowForm, setCards }) => {
       if (!urlValidation(form.image))
         throw new Error("Image must be a valid URL");
       if (!form.description.trim()) throw new Error("Description is required");
+      if (card) {
+        setCards((prev) => {
+          const updatedCards = prev.map((currCard) =>
+            currCard.id === card.id ? { ...currCard, ...form } : currCard
+          );
+          localStorage.setItem("cards", JSON.stringify(updatedCards));
+          return updatedCards;
+        });
+        setSelectedCardEdit(null);
 
-      const newCard = { ...form, id: crypto.randomUUID() };
+        toast.success("Entry updated successfully!");
+      } else {
+        const newCard = { ...form, id: crypto.randomUUID() };
+        setCards((prev) => {
+          const updateCards = [...prev, newCard];
+          localStorage.setItem("cards", JSON.stringify(updateCards));
+          return updateCards;
+        });
+        setForm({ title: "", date: "", image: "", description: "" });
 
-      setCards((prev) => {
-        const updateCards = [...prev, newCard];
-        localStorage.setItem("cards", JSON.stringify(updateCards));
-        return updateCards;
-      });
-
-      // setSubmitted(newCard);
-
-      setForm({ title: "", date: "", image: "", description: "" });
-      toast.success("Diary created successfully!");
+        toast.success("Entry created successfully!");
+      }
       setShowForm(!showForm);
     } catch (error) {
       toast.error(error.message);
