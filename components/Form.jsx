@@ -51,6 +51,11 @@ const Form = ({
     e.preventDefault(e.target.elements);
 
     try {
+      const today = form.date; // formato YYYY-MM-DD
+      const usedDates = JSON.parse(localStorage.getItem("usedDates")) || [];
+      if (usedDates.includes(today)) {
+        throw new Error("You can only create one diary per day!");
+      }
       if (!form.title.trim()) throw new Error("Name is required");
       if (!form.date.trim()) throw new Error("Date is required");
       if (!form.image.trim()) throw new Error("Image is required");
@@ -77,8 +82,22 @@ const Form = ({
         });
         setForm({ title: "", date: "", image: "", description: "" });
 
+<<<<<<< HEAD
         toast.success("Entry created successfully!");
       }
+=======
+      setCards((prev) => {
+        const updateCards = [...prev, newCard];
+        localStorage.setItem("cards", JSON.stringify(updateCards));
+        return updateCards;
+      });
+
+      usedDates.push(today);
+      localStorage.setItem("usedDates", JSON.stringify(usedDates));
+
+      setForm({ title: "", date: "", image: "", description: "" });
+      toast.success("Diary created successfully!");
+>>>>>>> origin/dev
       setShowForm(!showForm);
     } catch (error) {
       toast.error(error.message);
@@ -132,6 +151,7 @@ const Form = ({
                   type="date"
                   name="date"
                   value={form.date}
+                  min={new Date().toISOString().split("T")[0]}
                   className="input input-bordered w-full mt-[0.2rem] mb-[0.3rem]"
                   onChange={handleChange}
                 />
