@@ -102,6 +102,7 @@ const Form = ({ showForm, setShowForm, setCards }) => {
                   type="date"
                   name="date"
                   value={form.date}
+                  min={new Date().toISOString().split("T")[0]}
                   className="input input-bordered w-full mt-[0.2rem] mb-[0.3rem]"
                   onChange={handleChange}
                 />
