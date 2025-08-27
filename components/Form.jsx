@@ -82,22 +82,8 @@ const Form = ({
         });
         setForm({ title: "", date: "", image: "", description: "" });
 
-<<<<<<< HEAD
         toast.success("Entry created successfully!");
       }
-=======
-      setCards((prev) => {
-        const updateCards = [...prev, newCard];
-        localStorage.setItem("cards", JSON.stringify(updateCards));
-        return updateCards;
-      });
-
-      usedDates.push(today);
-      localStorage.setItem("usedDates", JSON.stringify(usedDates));
-
-      setForm({ title: "", date: "", image: "", description: "" });
-      toast.success("Diary created successfully!");
->>>>>>> origin/dev
       setShowForm(!showForm);
     } catch (error) {
       toast.error(error.message);
