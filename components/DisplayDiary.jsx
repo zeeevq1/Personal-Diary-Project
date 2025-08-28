@@ -93,8 +93,9 @@ const DisplayDiary = ({ cards, setCards, setShowForm, showForm }) => {
         <Form
           showForm={showForm}
           setShowForm={setShowForm}
+          cards={cards}
           setCards={setCards}
-          card={selectedCardEdit}
+          currentCard={selectedCardEdit}
           setSelectedCardEdit={setSelectedCardEdit}
         />
       )}

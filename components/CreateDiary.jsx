@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Form from "./Form";
-const CreateDiary = ({ showForm, setShowForm, setCards }) => {
+const CreateDiary = ({ showForm, setShowForm, cards, setCards }) => {
   const handleClick = () => {
     setShowForm(!showForm);
   };
@@ -24,6 +24,7 @@ const CreateDiary = ({ showForm, setShowForm, setCards }) => {
         <Form
           showForm={showForm}
           setShowForm={setShowForm}
+          cards={cards}
           setCards={setCards}
         />
       )}

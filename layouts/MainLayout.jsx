@@ -1,6 +1,7 @@
 import { CreateDiary, Header, DisplayDiary } from "../components";
 import { ToastContainer } from "react-toastify";
 import { useEffect, useState } from "react";
+import card from "daisyui/components/card";
 
 const MainLayout = () => {
   const savedCards = JSON.parse(localStorage.getItem("cards")) || [];
@@ -19,6 +20,7 @@ const MainLayout = () => {
       <Header
         showForm={showForm}
         setShowForm={setShowForm}
+        cards={cards}
         setCards={setCards}
         hasCards={hasCards}
       />
@@ -31,7 +33,11 @@ const MainLayout = () => {
             showForm={showForm}
           />
         ) : (
-          <CreateDiary setShowForm={setShowForm} setCards={setCards} />
+          <CreateDiary
+            setShowForm={setShowForm}
+            cards={cards}
+            setCards={setCards}
+          />
         )}
       </main>
       <footer></footer>

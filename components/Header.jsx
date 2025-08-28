@@ -1,6 +1,6 @@
 import Form from "./Form";
 
-const Header = ({ showForm, setShowForm, setCards, hasCards }) => {
+const Header = ({ showForm, setShowForm, setCards, hasCards, cards }) => {
   const handleClick = () => {
     setShowForm(!showForm);
   };
@@ -23,6 +23,7 @@ const Header = ({ showForm, setShowForm, setCards, hasCards }) => {
           <Form
             showForm={showForm}
             setShowForm={setShowForm}
+            cards={cards}
             setCards={setCards}
           />
         )}

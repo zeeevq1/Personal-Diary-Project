@@ -4,8 +4,9 @@ import { toast } from "react-toastify";
 const Form = ({
   showForm,
   setShowForm,
+  cards,
   setCards,
-  card,
+  currentCard,
   setSelectedCardEdit,
 }) => {
   const urlValidation = (url) => {
@@ -25,22 +26,27 @@ const Form = ({
   });
 
   useEffect(() => {
-    if (card) {
-      console.log("Editing card:", card.title);
+    if (currentCard) {
       setForm({
-        title: card.title,
-        date: card.date,
-        image: card.image,
-        description: card.description,
+        title: currentCard.title,
+        date: currentCard.date,
+        image: currentCard.image,
+        description: currentCard.description,
       });
     } else {
-      console.log("No card, creating new one");
-      setForm({ title: "", date: "", image: "", description: "" });
+      setForm({
+        title: "",
+        date: new Date().toISOString().split("T")[0],
+        image: "",
+        description: "",
+      });
     }
-  }, [card]);
+  }, [currentCard]);
 
   const handleOnClick = () => {
-    setSelectedCardEdit(null);
+    if (currentCard) {
+      setSelectedCardEdit(null);
+    }
     setShowForm(!showForm);
   };
   const handleChange = (e) => {
@@ -51,38 +57,41 @@ const Form = ({
     e.preventDefault(e.target.elements);
 
     try {
-      const today = form.date; // formato YYYY-MM-DD
-      const usedDates = JSON.parse(localStorage.getItem("usedDates")) || [];
-      if (usedDates.includes(today)) {
-        throw new Error("You can only create one diary per day!");
-      }
       if (!form.title.trim()) throw new Error("Name is required");
       if (!form.date.trim()) throw new Error("Date is required");
       if (!form.image.trim()) throw new Error("Image is required");
       if (!urlValidation(form.image))
         throw new Error("Image must be a valid URL");
       if (!form.description.trim()) throw new Error("Description is required");
-      if (card) {
+      if (currentCard) {
         setCards((prev) => {
           const updatedCards = prev.map((currCard) =>
-            currCard.id === card.id ? { ...currCard, ...form } : currCard
+            currCard.id === currentCard.id ? { ...currCard, ...form } : currCard
           );
           localStorage.setItem("cards", JSON.stringify(updatedCards));
           return updatedCards;
         });
         setSelectedCardEdit(null);
-
         toast.success("Entry updated successfully!");
       } else {
-        const newCard = { ...form, id: crypto.randomUUID() };
-        setCards((prev) => {
-          const updateCards = [...prev, newCard];
-          localStorage.setItem("cards", JSON.stringify(updateCards));
-          return updateCards;
-        });
-        setForm({ title: "", date: "", image: "", description: "" });
+        const exist = cards.some((item) => {
+          console.log(item.date + " " + form.date);
 
-        toast.success("Entry created successfully!");
+          return item.date === form.date;
+        });
+
+        if (exist) {
+          toast.error("Date already exists!");
+        } else {
+          setCards((prev) => {
+            const newCard = { ...form, id: crypto.randomUUID() };
+            const updateCards = [...prev, newCard];
+            localStorage.setItem("cards", JSON.stringify(updateCards));
+            return updateCards;
+          });
+          toast.success("Entry created successfully!");
+        }
+        setForm({ title: "", date: "", image: "", description: "" });
       }
       setShowForm(!showForm);
     } catch (error) {
@@ -137,9 +146,10 @@ const Form = ({
                   type="date"
                   name="date"
                   value={form.date}
-                  min={new Date().toISOString().split("T")[0]}
-                  className="input input-bordered w-full mt-[0.2rem] mb-[0.3rem]"
+                  className="input input-bordered w-full mt-[0.2rem] mb-[0.3rem] disabled:opacity-100 
+                  disabled:cursor-text disabled:border-gray-300 disabled:text-black"
                   onChange={handleChange}
+                  disabled
                 />
               </label>
 
