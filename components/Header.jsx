@@ -7,10 +7,7 @@ const Header = ({ showForm, setShowForm, setCards, hasCards, cards }) => {
   return (
     <header className="w-full bg-black py-1">
       <nav className="flex justify-between items-center">
-        <img
-          src="./public/logo.png"
-          className="w-[80px] h-[80px] ml-[1.2rem]"
-        ></img>
+        <img src="/logo.png" className="w-[80px] h-[80px] ml-[1.2rem]"></img>
         {hasCards && (
           <button
             onClick={handleClick}

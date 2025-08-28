@@ -9,7 +9,7 @@ const CreateDiary = ({ showForm, setShowForm, cards, setCards }) => {
       {!showForm ? (
         <div className="flex flex-col items-center">
           <img
-            src="../public/diary-logo.png"
+            src="/diary-logo.png"
             alt="Diary"
             className="w-[40px] h-[40px]"
           />
